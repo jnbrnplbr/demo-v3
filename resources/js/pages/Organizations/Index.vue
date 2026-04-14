@@ -11,7 +11,9 @@ import type { App, Inertia } from '@/wayfinder/types';
 
 type Paginated<T> = {
     data: T[];
-    links: { url: string | null; label: string; active: boolean }[];
+    meta: {
+        links: { url: string | null; label: string; active: boolean }[];
+    };
 };
 
 const props = defineProps<
@@ -49,7 +51,7 @@ watch(search, (value) => {
     <Head title="Organizations" />
 
     <AppLayout :breadcrumbs="breadcrumbs">
-        <div class="flex h-full flex-1 flex-col gap-4 p-4">
+        <div class="flex flex-1 flex-col gap-4 p-4">
             <h1 class="text-2xl font-semibold tracking-tight">Organizations</h1>
 
             <!-- Search -->
@@ -96,11 +98,11 @@ watch(search, (value) => {
 
             <!-- Pagination Links -->
             <div
-                v-if="props.organizations.links.length > 3"
+                v-if="props.organizations.meta.links.length > 3"
                 class="flex items-center justify-center gap-1"
             >
                 <template
-                    v-for="link in props.organizations.links"
+                    v-for="link in props.organizations.meta.links"
                     :key="link.label"
                 >
                     <Link

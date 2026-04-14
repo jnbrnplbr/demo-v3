@@ -39,17 +39,17 @@ class DataLoadingController
     public function partialReloads(): Response
     {
         return Inertia::render('Features/DataLoading/PartialReloads', [
-            'users' => [
+            'users' => fn () => [
                 ['id' => 1, 'name' => 'Alice', 'role' => 'Admin'],
                 ['id' => 2, 'name' => 'Bob', 'role' => 'Editor'],
                 ['id' => 3, 'name' => 'Charlie', 'role' => 'Viewer'],
             ],
-            'stats' => [
+            'stats' => fn () => [
                 'total' => Contact::count(),
                 'favorites' => Contact::where('is_favorite', true)->count(),
             ],
-            'timestamp' => now()->toDateTimeString(),
-            'randomNumber' => random_int(1, 1000),
+            'timestamp' => fn () => now()->toDateTimeString(),
+            'randomNumber' => fn () => random_int(1, 1000),
         ]);
     }
 
