@@ -10,10 +10,11 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Sleep;
 use Inertia\Inertia;
 use Inertia\Response;
+use RuntimeException;
 
 class DataLoadingController
 {
-    public function deferredProps(): Response
+    public function deferredProps(Request $request): Response
     {
         return Inertia::render('Features/DataLoading/DeferredProps', [
             'quickStat' => 'Loaded instantly',
@@ -33,6 +34,15 @@ class DataLoadingController
                     'name' => $contact->name,
                 ])->all();
             }, 'heavy'),
+            'flakyReport' => Inertia::defer(function () use ($request) {
+                Sleep::for(600)->milliseconds();
+
+                if (! $request->hasHeader('X-Force-Success')) {
+                    throw new RuntimeException('Upstream report service is unavailable.');
+                }
+
+                return ['value' => random_int(1000, 9999)];
+            }, rescue: true),
         ]);
     }
 

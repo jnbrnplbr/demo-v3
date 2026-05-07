@@ -12,6 +12,8 @@ it('renders the deferred props page with instant and deferred data', function ()
         ->assertSee('Loaded instantly')
         ->assertSee('Deferred Stats')
         ->assertSee('Heavy Data')
+        ->assertSee('Rescued Deferred Prop')
+        ->assertSee('Failed to load report')
         ->assertSee('Reloading Slot')
         ->assertNoJavaScriptErrors();
 });
