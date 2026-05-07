@@ -42,7 +42,7 @@ class DataLoadingController
                 }
 
                 return ['value' => random_int(1000, 9999)];
-            }, rescue: true),
+            }, 'flaky', rescue: true),
         ]);
     }
 
