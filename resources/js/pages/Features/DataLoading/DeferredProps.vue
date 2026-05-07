@@ -14,6 +14,7 @@ defineProps<{
         totalFavorites: number;
     };
     heavyData?: Array<{ id: number; name: string }>;
+    flakyReport?: { value: number };
 }>();
 
 const breadcrumbs: BreadcrumbItem[] = [
@@ -114,6 +115,7 @@ const breadcrumbs: BreadcrumbItem[] = [
                 </FeatureCard>
             </div>
 
+            <div class="grid gap-6 lg:grid-cols-2">
             <!-- Reloading slot demo -->
             <FeatureCard title="Reloading Slot">
                 <template #description>
@@ -169,6 +171,68 @@ const breadcrumbs: BreadcrumbItem[] = [
                     </template>
                 </Deferred>
             </FeatureCard>
+
+            <FeatureCard title="Rescued Deferred Prop">
+                <template #description>
+                    <code class="text-xs">Inertia::defer(fn, rescue: true)</code>.
+                    When the closure throws, the prop is marked rescued and
+                    the <code class="text-xs">rescue</code> slot renders
+                    instead of the fallback. Retry sends an
+                    <code class="text-xs">X-Force-Success</code> header so the
+                    server returns data instead of throwing.
+                </template>
+                <Deferred data="flakyReport">
+                    <template #fallback>
+                        <div class="space-y-3">
+                            <div
+                                class="h-4 w-2/3 animate-pulse rounded bg-muted"
+                            />
+                            <div
+                                class="h-4 w-1/3 animate-pulse rounded bg-muted"
+                            />
+                        </div>
+                    </template>
+                    <template #rescue="{ reloading }">
+                        <div
+                            :class="{
+                                'opacity-50 transition-opacity': reloading,
+                            }"
+                            class="space-y-3 rounded border border-destructive/30 bg-destructive/5 p-3 text-sm text-destructive"
+                        >
+                            <div>
+                                <div class="font-medium">
+                                    Failed to load report
+                                </div>
+                                <div class="text-xs opacity-80">
+                                    Server threw during deferred resolution.
+                                </div>
+                            </div>
+                            <Button
+                                variant="outline"
+                                size="sm"
+                                :disabled="reloading"
+                                @click="
+                                    router.reload({
+                                        only: ['flakyReport'],
+                                        headers: { 'X-Force-Success': '1' },
+                                    })
+                                "
+                            >
+                                {{ reloading ? 'Retrying...' : 'Retry' }}
+                            </Button>
+                        </div>
+                    </template>
+                    <div class="rounded border border-emerald-500/30 bg-emerald-500/5 p-3 text-sm">
+                        <div class="font-medium text-emerald-700 dark:text-emerald-400">
+                            Report loaded
+                        </div>
+                        <div class="text-xs">
+                            Value: <strong>{{ flakyReport?.value }}</strong>
+                        </div>
+                    </div>
+                </Deferred>
+            </FeatureCard>
+            </div>
         </div>
     </AppLayout>
 </template>
