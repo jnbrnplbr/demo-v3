@@ -116,122 +116,129 @@ const breadcrumbs: BreadcrumbItem[] = [
             </div>
 
             <div class="grid gap-6 lg:grid-cols-2">
-            <!-- Reloading slot demo -->
-            <FeatureCard title="Reloading Slot">
-                <template #description>
-                    The <code class="text-xs">reloading</code> slot prop lets
-                    you show stale data with a visual indicator while
-                    refreshing.
-                </template>
-                <template #header-action>
-                    <Button
-                        variant="outline"
-                        @click="router.reload({ only: ['slowStats'] })"
-                    >
-                        Reload Stats
-                    </Button>
-                </template>
-                <Deferred data="slowStats">
-                    <template #fallback>
-                        <div class="space-y-3">
-                            <div
-                                class="h-4 w-3/4 animate-pulse rounded bg-muted"
-                            />
-                            <div
-                                class="h-4 w-1/2 animate-pulse rounded bg-muted"
-                            />
-                        </div>
+                <!-- Reloading slot demo -->
+                <FeatureCard title="Reloading Slot">
+                    <template #description>
+                        The <code class="text-xs">reloading</code> slot prop
+                        lets you show stale data with a visual indicator while
+                        refreshing.
                     </template>
-                    <template #default="{ reloading }">
-                        <div
-                            :class="{
-                                'opacity-50 transition-opacity': reloading,
-                            }"
-                            class="space-y-2"
+                    <template #header-action>
+                        <Button
+                            variant="outline"
+                            @click="router.reload({ only: ['slowStats'] })"
                         >
-                            <div class="flex items-center gap-2">
-                                <span class="text-sm"
-                                    >Total Contacts:
-                                    <strong>{{
-                                        slowStats?.totalContacts
-                                    }}</strong></span
-                                >
-                                <Badge
-                                    v-if="reloading"
-                                    variant="secondary"
-                                    class="text-xs"
-                                    >Refreshing...</Badge
-                                >
-                            </div>
-                            <div class="text-sm">
-                                Total Favorites:
-                                <strong>{{ slowStats?.totalFavorites }}</strong>
-                            </div>
-                        </div>
+                            Reload Stats
+                        </Button>
                     </template>
-                </Deferred>
-            </FeatureCard>
-
-            <FeatureCard title="Rescued Deferred Prop">
-                <template #description>
-                    <code class="text-xs">Inertia::defer(fn, rescue: true)</code>.
-                    When the closure throws, the prop is marked rescued and
-                    the <code class="text-xs">rescue</code> slot renders
-                    instead of the fallback. Retry sends an
-                    <code class="text-xs">X-Force-Success</code> header so the
-                    server returns data instead of throwing.
-                </template>
-                <Deferred data="flakyReport">
-                    <template #fallback>
-                        <div class="space-y-3">
-                            <div
-                                class="h-4 w-2/3 animate-pulse rounded bg-muted"
-                            />
-                            <div
-                                class="h-4 w-1/3 animate-pulse rounded bg-muted"
-                            />
-                        </div>
-                    </template>
-                    <template #rescue="{ reloading }">
-                        <div
-                            :class="{
-                                'opacity-50 transition-opacity': reloading,
-                            }"
-                            class="space-y-3 rounded border border-destructive/30 bg-destructive/5 p-3 text-sm text-destructive"
-                        >
-                            <div>
-                                <div class="font-medium">
-                                    Failed to load report
-                                </div>
-                                <div class="text-xs opacity-80">
-                                    Server threw during deferred resolution.
-                                </div>
+                    <Deferred data="slowStats">
+                        <template #fallback>
+                            <div class="space-y-3">
+                                <div
+                                    class="h-4 w-3/4 animate-pulse rounded bg-muted"
+                                />
+                                <div
+                                    class="h-4 w-1/2 animate-pulse rounded bg-muted"
+                                />
                             </div>
-                            <Button
-                                variant="outline"
-                                size="sm"
-                                :disabled="reloading"
-                                @click="
-                                    router.reload({
-                                        only: ['flakyReport'],
-                                        headers: { 'X-Force-Success': '1' },
-                                    })
-                                "
+                        </template>
+                        <template #default="{ reloading }">
+                            <div
+                                :class="{
+                                    'opacity-50 transition-opacity': reloading,
+                                }"
+                                class="space-y-2"
                             >
-                                {{ reloading ? 'Retrying...' : 'Retry' }}
-                            </Button>
-                        </div>
+                                <div class="flex items-center gap-2">
+                                    <span class="text-sm"
+                                        >Total Contacts:
+                                        <strong>{{
+                                            slowStats?.totalContacts
+                                        }}</strong></span
+                                    >
+                                    <Badge
+                                        v-if="reloading"
+                                        variant="secondary"
+                                        class="text-xs"
+                                        >Refreshing...</Badge
+                                    >
+                                </div>
+                                <div class="text-sm">
+                                    Total Favorites:
+                                    <strong>{{
+                                        slowStats?.totalFavorites
+                                    }}</strong>
+                                </div>
+                            </div>
+                        </template>
+                    </Deferred>
+                </FeatureCard>
+
+                <FeatureCard title="Rescued Deferred Prop">
+                    <template #description>
+                        <code class="text-xs"
+                            >Inertia::defer(fn, rescue: true)</code
+                        >. When the closure throws, the prop is marked rescued
+                        and the <code class="text-xs">rescue</code> slot renders
+                        instead of the fallback. Retry sends an
+                        <code class="text-xs">X-Force-Success</code> header so
+                        the server returns data instead of throwing.
                     </template>
-                    <div class="rounded border border-emerald-500/30 bg-emerald-500/5 p-3 text-sm">
-                        <div class="font-medium text-emerald-700 dark:text-emerald-400">
-                            Report loaded
+                    <Deferred data="flakyReport">
+                        <template #fallback>
+                            <div class="space-y-3">
+                                <div
+                                    class="h-4 w-2/3 animate-pulse rounded bg-muted"
+                                />
+                                <div
+                                    class="h-4 w-1/3 animate-pulse rounded bg-muted"
+                                />
+                            </div>
+                        </template>
+                        <template #rescue="{ reloading }">
+                            <div
+                                :class="{
+                                    'opacity-50 transition-opacity': reloading,
+                                }"
+                                class="space-y-3 rounded border border-destructive/30 bg-destructive/5 p-3 text-sm text-destructive"
+                            >
+                                <div>
+                                    <div class="font-medium">
+                                        Failed to load report
+                                    </div>
+                                    <div class="text-xs opacity-80">
+                                        Server threw during deferred resolution.
+                                    </div>
+                                </div>
+                                <Button
+                                    variant="outline"
+                                    size="sm"
+                                    :disabled="reloading"
+                                    @click="
+                                        router.reload({
+                                            only: ['flakyReport'],
+                                            headers: { 'X-Force-Success': '1' },
+                                        })
+                                    "
+                                >
+                                    {{ reloading ? 'Retrying...' : 'Retry' }}
+                                </Button>
+                            </div>
+                        </template>
+                        <div
+                            class="rounded border border-emerald-500/30 bg-emerald-500/5 p-3 text-sm"
+                        >
+                            <div
+                                class="font-medium text-emerald-700 dark:text-emerald-400"
+                            >
+                                Report loaded
+                            </div>
+                            <div class="text-xs">
+                                Value: <strong>{{ flakyReport?.value }}</strong>
+                            </div>
                         </div>
-                        <div class="text-xs">
-                            Value: <strong>{{ flakyReport?.value }}</strong>
-                        </div>
-                    </div>
-                </Deferred>
-            </FeatureCard>
+                    </Deferred>
+                </FeatureCard>
             </div>
         </div>
     </AppLayout>
