@@ -1,5 +1,6 @@
 <?php
 
+use App\Exceptions\FlakyReportException;
 use App\Http\Middleware\HandleAppearance;
 use App\Http\Middleware\HandleInertiaRequests;
 use Illuminate\Foundation\Application;
@@ -29,5 +30,7 @@ return Application::configure(basePath: dirname(__DIR__))
 
     })
     ->withExceptions(function (Exceptions $exceptions): void {
-        //
+        $exceptions->dontReport([
+            FlakyReportException::class,
+        ]);
     })->create();

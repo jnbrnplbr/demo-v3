@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Feature;
 
+use App\Exceptions\FlakyReportException;
 use App\Http\Resources\ContactResource;
 use App\Models\Contact;
 use Illuminate\Database\Eloquent\Builder;
@@ -10,7 +11,6 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Sleep;
 use Inertia\Inertia;
 use Inertia\Response;
-use RuntimeException;
 
 class DataLoadingController
 {
@@ -38,7 +38,7 @@ class DataLoadingController
                 Sleep::for(600)->milliseconds();
 
                 if (! $request->hasHeader('X-Force-Success')) {
-                    throw new RuntimeException('Upstream report service is unavailable.');
+                    throw new FlakyReportException('Upstream report service is unavailable.');
                 }
 
                 return ['value' => random_int(1000, 9999)];
