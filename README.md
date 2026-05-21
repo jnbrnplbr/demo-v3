@@ -2,8 +2,6 @@
 
 A demo app showcasing Inertia.js v3 features. Built on the Laravel starter kit with a mini CRM and feature showcase pages.
 
-> Inertia.js v3 is currently in beta. See the [upgrade guide](https://inertiajs.com/docs/v3/getting-started/upgrade-guide) for more information.
-
 ## Tech Stack
 
 - **Laravel 12** with PHP 8.5
