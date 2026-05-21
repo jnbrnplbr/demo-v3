@@ -90,10 +90,18 @@ onUnmounted(() => {
                 >
                     <div class="space-y-4">
                         <div class="flex flex-wrap gap-2">
-                            <Button size="sm" @click="registerOnceBefore">
+                            <Button
+                                size="sm"
+                                data-test="register-once-before"
+                                @click="registerOnceBefore"
+                            >
                                 once('before')
                             </Button>
-                            <Button size="sm" @click="registerOnceSuccess">
+                            <Button
+                                size="sm"
+                                data-test="register-once-success"
+                                @click="registerOnceSuccess"
+                            >
                                 once('success')
                             </Button>
                         </div>
