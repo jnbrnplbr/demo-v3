@@ -11,6 +11,8 @@ A demo app showcasing Inertia.js v3 features. Built on the Laravel starter kit w
 - **Vue 3** with Composition API and TypeScript
 - **Tailwind CSS 4** + shadcn-vue
 - **Pest 4** with browser testing (Playwright)
+- **pnpm** (^11) for package management
+- **oxlint** + **oxfmt** for linting and formatting
 
 ## What's Inside
 
@@ -22,17 +24,17 @@ Dashboard, contacts, organizations, and notes demonstrating real-world Inertia p
 
 Dedicated pages organized by category with interactive demos:
 
-| Category | Pages |
-|---|---|
-| **Forms** | useForm, Form Component, File Uploads, Validation, Precognition, Optimistic Updates, useFormContext, Dotted Keys, Wayfinder |
-| **Navigation** | Links, Preserve State, Preserve Scroll, View Transitions, History Management, Async Requests, Instant Visits, URL Fragments, Manual Visits, Redirects, Scroll Management |
-| **Data Loading** | Deferred Props, Partial Reloads, Infinite Scroll, When Visible, Polling, Prop Merging, Optional Props, Once Props |
-| **Prefetching** | Link Prefetch, Stale While Revalidate, Manual Prefetch, Cache Management |
-| **State** | Remember, Flash Data, Shared Props |
-| **Layouts** | Persistent Layouts, Nested Layouts, Head Component, Layout Props |
-| **Events & Lifecycle** | Global Events, Visit Callbacks, Progress Bar |
-| **Error Handling** | HTTP Exceptions, Network Errors |
-| **HTTP** | useHttp |
+| Category               | Pages                                                                                                                                                                    |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Forms**              | useForm, Form Component, File Uploads, Validation, Precognition, Optimistic Updates, useFormContext, Dotted Keys, Wayfinder                                              |
+| **Navigation**         | Links, Preserve State, Preserve Scroll, View Transitions, History Management, Async Requests, Instant Visits, URL Fragments, Manual Visits, Redirects, Scroll Management |
+| **Data Loading**       | Deferred Props, Partial Reloads, Infinite Scroll, When Visible, Polling, Prop Merging, Optional Props, Once Props                                                        |
+| **Prefetching**        | Link Prefetch, Stale While Revalidate, Manual Prefetch, Cache Management                                                                                                 |
+| **State**              | Remember, Flash Data, Shared Props                                                                                                                                       |
+| **Layouts**            | Persistent Layouts, Nested Layouts, Head Component, Layout Props                                                                                                         |
+| **Events & Lifecycle** | Global Events, Visit Callbacks, Progress Bar                                                                                                                             |
+| **Error Handling**     | HTTP Exceptions, Network Errors                                                                                                                                          |
+| **HTTP**               | useHttp                                                                                                                                                                  |
 
 ## Setup
 
@@ -41,7 +43,7 @@ Dedicated pages organized by category with interactive demos:
 git clone git@github.com:inertiajs/demo-v3.git
 cd demo-v3
 composer install
-npm install
+pnpm install
 
 # Environment
 cp .env.example .env
@@ -57,10 +59,10 @@ php artisan wayfinder:generate
 # Development
 composer run dev
 # Or manually:
-# php artisan serve & npm run dev
+# php artisan serve & pnpm run dev
 
 # For production builds, generate Wayfinder routes first:
-# php artisan wayfinder:generate && npm run build
+# php artisan wayfinder:generate && pnpm run build
 ```
 
 ## Testing
@@ -82,6 +84,5 @@ php artisan test --filter="useForm"
 Browser tests require Playwright:
 
 ```bash
-npx playwright install
+pnpm exec playwright install
 ```
-
