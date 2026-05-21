@@ -113,6 +113,8 @@ class DataLoadingController
 
     public function polling(): Response
     {
+        Sleep::for(random_int(500, 3000))->milliseconds();
+
         return Inertia::render('Features/DataLoading/Polling', [
             'currentTime' => now()->toDateTimeString(),
             'randomNumber' => random_int(1, 1000),

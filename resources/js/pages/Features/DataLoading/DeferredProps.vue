@@ -174,7 +174,7 @@ const breadcrumbs: BreadcrumbItem[] = [
                     </Deferred>
                 </FeatureCard>
 
-                <FeatureCard title="Rescued Deferred Prop">
+                <FeatureCard title="Rescued Deferred Prop" badge="v3.1">
                     <template #description>
                         <code class="text-xs"
                             >Inertia::defer(fn, rescue: true)</code

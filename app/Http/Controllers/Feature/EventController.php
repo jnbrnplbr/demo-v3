@@ -19,6 +19,16 @@ class EventController
         return Inertia::flash('message', 'Action completed successfully!')->back();
     }
 
+    public function onceEvents(): Response
+    {
+        return Inertia::render('Features/Events/OnceEvents');
+    }
+
+    public function onceEventsAction(): RedirectResponse
+    {
+        return Inertia::flash('message', 'One-shot action fired!')->back();
+    }
+
     public function visitCallbacks(): Response
     {
         return Inertia::render('Features/Events/VisitCallbacks');

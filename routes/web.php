@@ -124,6 +124,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::get('global-events', [Feature\EventController::class, 'globalEvents'])->name('global-events');
             Route::post('global-events/action', [Feature\EventController::class, 'globalEventsAction'])->name('global-events.action');
 
+            Route::get('once-events', [Feature\EventController::class, 'onceEvents'])->name('once-events');
+            Route::post('once-events/action', [Feature\EventController::class, 'onceEventsAction'])->name('once-events.action');
+
             Route::get('visit-callbacks', [Feature\EventController::class, 'visitCallbacks'])->name('visit-callbacks');
             Route::post('visit-callbacks/action', [Feature\EventController::class, 'visitCallbacksAction'])->name('visit-callbacks.action');
 
