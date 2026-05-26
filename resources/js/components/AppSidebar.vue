@@ -233,6 +233,11 @@ const featuresSection: NavSectionType = {
                     href: '/features/events/global-events',
                 },
                 {
+                    title: 'Inertia.once',
+                    href: '/features/events/once-events',
+                    badge: 'v3.2',
+                },
+                {
                     title: 'Visit Callbacks',
                     href: '/features/events/visit-callbacks',
                 },

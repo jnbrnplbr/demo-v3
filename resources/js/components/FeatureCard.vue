@@ -15,6 +15,7 @@ defineProps<{
     title: string;
     description?: string;
     infoCard?: boolean;
+    badge?: string;
 }>();
 </script>
 
@@ -26,7 +27,14 @@ defineProps<{
                 class="flex items-center justify-between"
             >
                 <div>
-                    <CardTitle>{{ title }}</CardTitle>
+                    <CardTitle class="flex items-center gap-2">
+                        {{ title }}
+                        <span
+                            v-if="badge"
+                            class="shrink-0 rounded bg-indigo-500/10 px-2 py-1 text-[10px] leading-none font-semibold text-indigo-500"
+                            >{{ badge }}</span
+                        >
+                    </CardTitle>
                     <CardDescription v-if="description || $slots.description">
                         <slot name="description">{{ description }}</slot>
                     </CardDescription>
@@ -34,7 +42,14 @@ defineProps<{
                 <slot name="header-action" />
             </div>
             <template v-else>
-                <CardTitle>{{ title }}</CardTitle>
+                <CardTitle class="flex items-center gap-2">
+                    {{ title }}
+                    <span
+                        v-if="badge"
+                        class="shrink-0 rounded bg-indigo-500/10 px-2 py-1 text-[10px] leading-none font-semibold text-indigo-500"
+                        >{{ badge }}</span
+                    >
+                </CardTitle>
                 <CardDescription v-if="description || $slots.description">
                     <slot name="description">{{ description }}</slot>
                 </CardDescription>
